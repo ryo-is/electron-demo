@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "@types/node": "12.12.21",
     "@types/webdriverio": "^4.8.0",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
@@ -50,6 +51,7 @@
     "prettier": "^2.0.5",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.2",
+    "spectron": "^10.0.1",
     "typescript": "~3.8.3",
     "vue-cli-plugin-electron-builder": "2.0.0-bata.6",
     "vue-cli-plugin-pug": "~1.0.7",

@@ -1,29 +1,16 @@
+import spectron from 'spectron'
 import { testWithSpectron } from 'vue-cli-plugin-electron-builder'
 jest.setTimeout(50000)
 
-test('Window Loads Properly', async () => {
-  // Wait for dev server to start
-  const { app, stopServe } = await testWithSpectron()
-  const win = app.browserWindow
-  const client = app.client
-
-  // Window was created
-  expect(await client.getWindowCount()).toBe(1)
-  // It is not minimized
-  expect(await win.isMinimized()).toBe(false)
-  // Window is visible
-  expect(await win.isVisible()).toBe(true)
-  // Size is correct
-  const { width, height } = await win.getBounds()
-  expect(width).toBeGreaterThan(0)
-  expect(height).toBeGreaterThan(0)
-  // App is loaded properly
-  expect(
-    /Welcome to Your Vue\.js (\+ TypeScript )?App/.test(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      await (client as any).getHTML('#app')
-    )
-  ).toBe(true)
-
+test('a window is created', async () => {
+  // Only v2.0+ require you to pass spectron as an arg
+  const { stdout, url, stopServe, app } = await testWithSpectron(spectron)
+  // stdout is the log of electron:serve
+  console.log(`electron:serve returned: ${stdout}`)
+  // url is the url for the dev server created with electron:serve
+  console.log(`the dev server url is: ${url}`)
+  // app is a spectron instance. It is attached to the dev server, launched, and waited for to load.
+  expect(await app.client.getWindowCount()).toBe(1)
+  // Before your tests end, make sure to stop the dev server and spectron
   await stopServe()
 })
