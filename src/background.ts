@@ -22,7 +22,9 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION as
+        | boolean
+        | undefined,
     },
   })
 
