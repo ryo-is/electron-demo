@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, Tray } from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
@@ -10,6 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
+let tray: Tray | null
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -26,6 +27,7 @@ function createWindow() {
         | boolean
         | undefined,
     },
+    show: false,
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -78,6 +80,22 @@ app.on('ready', async () => {
     // }
   }
   createWindow()
+
+  const iconPath =
+    process.env.NODE_ENV === 'development'
+      ? __dirname + '/../public/img/icons/app-icon.png'
+      : __dirname + '/bundled/img/icons/app-icon.png'
+  console.log(iconPath)
+  tray = new Tray(iconPath)
+  tray.on('click', (e) => {
+    console.log(e)
+    if (win === null) return
+    if (win.isVisible()) {
+      win.hide()
+    } else {
+      win.show()
+    }
+  })
 })
 
 // Exit cleanly on request from parent process in development mode.
