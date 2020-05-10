@@ -3,6 +3,8 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       nodeIntegration: true,
+      buildResources: 'electron-build',
+      files: ['**/*', 'public/img/icons/**/*'],
     },
   },
 }
