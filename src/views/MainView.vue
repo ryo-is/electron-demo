@@ -1,8 +1,6 @@
 <template lang="pug">
   .home
     .title home
-    .text text
-    v-btn hoge
 </template>
 
 <script lang="ts">

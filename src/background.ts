@@ -20,7 +20,7 @@ protocol.registerSchemesAsPrivileged([
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
+    width: 300,
     height: 600,
     x: 0,
     y: 0,
@@ -31,6 +31,7 @@ function createWindow() {
     },
     show: false,
     closable: false,
+    center: true,
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -89,10 +90,13 @@ app.on('ready', async () => {
       ? __dirname + '/../public/img/icons/app-icon.png'
       : __dirname + '/bundled/img/icons/app-icon.png'
   tray = new Tray(iconPath)
-  tray.on('click', (event, bounds) => {
-    console.log(event, bounds)
+  tray.on('click', (_event, bounds) => {
     if (win === null) createWindow()
     const window: BrowserWindow = win as BrowserWindow
+    window.setBounds({
+      x: bounds.x,
+      y: bounds.y,
+    })
     if (window.isVisible()) {
       window.hide()
     } else {
