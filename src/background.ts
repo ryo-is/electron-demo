@@ -10,7 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
-let tray: Tray | null
+let tray: Tray
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -22,12 +22,15 @@ function createWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
+    x: 0,
+    y: 0,
     webPreferences: {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION as
         | boolean
         | undefined,
     },
     show: false,
+    closable: false,
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -85,15 +88,15 @@ app.on('ready', async () => {
     process.env.NODE_ENV === 'development'
       ? __dirname + '/../public/img/icons/app-icon.png'
       : __dirname + '/bundled/img/icons/app-icon.png'
-  console.log(iconPath)
   tray = new Tray(iconPath)
-  tray.on('click', (e) => {
-    console.log(e)
-    if (win === null) return
-    if (win.isVisible()) {
-      win.hide()
+  tray.on('click', (event, bounds) => {
+    console.log(event, bounds)
+    if (win === null) createWindow()
+    const window: BrowserWindow = win as BrowserWindow
+    if (window.isVisible()) {
+      window.hide()
     } else {
-      win.show()
+      window.show()
     }
   })
 })
