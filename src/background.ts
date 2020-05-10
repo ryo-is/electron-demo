@@ -1,5 +1,6 @@
 'use strict'
 
+import path from 'path'
 import { app, protocol, BrowserWindow, Tray } from 'electron'
 import {
   createProtocol,
@@ -37,6 +38,7 @@ function createWindow() {
     resizable: false,
     movable: false,
     frame: false,
+    icon: path.join(__dirname + '/../build/icons/icon.ico'),
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -96,19 +98,20 @@ app.on('ready', async () => {
 
   const iconPath =
     process.env.NODE_ENV === 'development'
-      ? __dirname + '/../public/img/icons/app-icon.png'
-      : __dirname + '/bundled/img/icons/app-icon.png'
+      ? path.join(__dirname + '/../build/icons/app-icon.png')
+      : path.join(__dirname + '/../build/icons/app-icon.png')
+  console.log(iconPath)
   tray = new Tray(iconPath)
   tray.on('click', (_event, bounds) => {
     if (win === null) createWindow()
     const window: BrowserWindow = win as BrowserWindow
-    window.setBounds({
-      x: bounds.x - 138,
-      y: bounds.y + 28,
-    })
     if (window.isVisible()) {
       window.hide()
     } else {
+      window.setBounds({
+        x: bounds.x - 138,
+        y: bounds.y + 28,
+      })
       window.show()
     }
   })
