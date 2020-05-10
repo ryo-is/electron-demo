@@ -1,12 +1,11 @@
 <template lang="pug">
   .home
-    .title home
+    .title.py-4 Pomodoro Timer
+    v-divider
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({
-  name: 'MainView',
-})
+export default Vue.extend({})
 </script>

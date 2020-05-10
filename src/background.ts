@@ -31,7 +31,12 @@ function createWindow() {
     },
     show: false,
     closable: false,
+    minimizable: false,
+    maximizable: false,
     center: true,
+    resizable: false,
+    movable: false,
+    frame: false,
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -43,6 +48,10 @@ function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  win.on('blur', () => {
+    if (win !== null) win.hide()
+  })
 
   win.on('closed', () => {
     win = null
@@ -94,8 +103,8 @@ app.on('ready', async () => {
     if (win === null) createWindow()
     const window: BrowserWindow = win as BrowserWindow
     window.setBounds({
-      x: bounds.x,
-      y: bounds.y,
+      x: bounds.x - 138,
+      y: bounds.y + 28,
     })
     if (window.isVisible()) {
       window.hide()
