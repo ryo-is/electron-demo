@@ -38,7 +38,7 @@ function createWindow() {
     resizable: false,
     movable: false,
     frame: false,
-    icon: path.join(__dirname + '/../build/icons/icon.ico'),
+    icon: path.join(__dirname, '/../build/icon.icns'),
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -96,11 +96,7 @@ app.on('ready', async () => {
   }
   createWindow()
 
-  const iconPath =
-    process.env.NODE_ENV === 'development'
-      ? path.join(__dirname + '/../build/icons/app-icon.png')
-      : path.join(__dirname + '/../build/icons/app-icon.png')
-  console.log(iconPath)
+  const iconPath = path.join(__dirname, '/../public/app-icon.png')
   tray = new Tray(iconPath)
   tray.on('click', (_event, bounds) => {
     if (win === null) createWindow()
