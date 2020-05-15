@@ -1,16 +1,13 @@
 <template lang="pug">
   v-app
     v-content
-      main-view
+      router-view
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import MainView from '@/views/MainView.vue'
 
-export default Vue.extend({
-  components: { MainView },
-})
+export default Vue.extend({})
 </script>
 
 <style lang="scss">
