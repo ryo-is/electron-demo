@@ -1,7 +1,7 @@
 'use strict'
 
 import path from 'path'
-import { app, protocol, BrowserWindow, Tray } from 'electron'
+import { app, protocol, BrowserWindow, Tray, powerMonitor } from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
@@ -95,6 +95,22 @@ app.on('ready', async () => {
     // }
   }
   createWindow()
+
+  powerMonitor.on('suspend', () => {
+    console.log('suspend')
+  })
+
+  powerMonitor.on('resume', () => {
+    console.log('resume')
+  })
+
+  powerMonitor.on('lock-screen', () => {
+    console.log('lock screen')
+  })
+
+  powerMonitor.on('unlock-screen', () => {
+    console.log('unlock screen')
+  })
 
   const iconPath = path.join(__dirname, '/../public/app-icon.png')
   tray = new Tray(iconPath)
