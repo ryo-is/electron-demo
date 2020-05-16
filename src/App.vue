@@ -1,6 +1,8 @@
 <template lang="pug">
   v-app
     v-content
+      .title.py-4 Pomodoro Timer
+      v-divider
       router-view
 </template>
 

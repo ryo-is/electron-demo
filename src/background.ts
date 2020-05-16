@@ -105,8 +105,6 @@ app.on('ready', async () => {
   }
   createWindow()
 
-  console.log(Notification.isSupported())
-
   powerMonitor.on('suspend', () => {
     console.log('suspend')
   })
