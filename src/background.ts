@@ -1,7 +1,14 @@
 'use strict'
 
 import path from 'path'
-import { app, protocol, BrowserWindow, Tray, powerMonitor } from 'electron'
+import {
+  app,
+  protocol,
+  BrowserWindow,
+  Tray,
+  powerMonitor,
+  Notification,
+} from 'electron'
 import {
   createProtocol,
   /* installVueDevtools */
@@ -12,6 +19,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
 let tray: Tray
+let notification: Notification
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -40,6 +48,7 @@ function createWindow() {
     frame: false,
     icon: path.join(__dirname, '/../build/icon.icns'),
   })
+  notification = new Notification()
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -110,6 +119,9 @@ app.on('ready', async () => {
 
   powerMonitor.on('unlock-screen', () => {
     console.log('unlock screen')
+    notification.title = 'unlock screen'
+    notification.body = 'unlock screen'
+    notification.show()
   })
 
   const iconPath = path.join(__dirname, '/../public/app-icon.png')

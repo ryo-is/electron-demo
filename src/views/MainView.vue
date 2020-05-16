@@ -1,6 +1,6 @@
 <template lang="pug">
   .home
-    .title.py-4 Pomodoro Timer
+    .title.py-4 Main View
     v-divider
     v-btn(to="/users") users
 </template>
