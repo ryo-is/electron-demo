@@ -105,22 +105,22 @@ app.on('ready', async () => {
   }
   createWindow()
 
-  powerMonitor.on('suspend', () => {
-    console.log('suspend')
-  })
+  // powerMonitor.on('suspend', () => {
+  //   console.log('suspend')
+  // })
 
-  powerMonitor.on('resume', () => {
-    console.log('resume')
-  })
+  // powerMonitor.on('resume', () => {
+  //   console.log('resume')
+  // })
 
-  powerMonitor.on('lock-screen', () => {
-    console.log('lock screen')
-  })
+  // powerMonitor.on('lock-screen', () => {
+  //   console.log('lock screen')
+  // })
 
   powerMonitor.on('unlock-screen', () => {
-    console.log('unlock screen')
-    notification.title = 'unlock screen'
-    notification.body = 'unlock screen'
+    // console.log('unlock screen')
+    notification.title = 'Pomodoro Timer'
+    notification.body = 'Welcome back'
     notification.show()
   })
 
