@@ -77,6 +77,7 @@ export default Vue.extend({
   },
   methods: {
     timerStart() {
+      this.disabled = true
       this.setSeconds = this.minites * 60
       this.intervalEvent = setInterval(() => {
         this.elapsedTime++
@@ -109,6 +110,7 @@ export default Vue.extend({
       this.value = 0
       this.elapsedTime = 0
       this.color = Color.PRIMARY
+      this.disabled = false
     },
     onNotification(bodyText: string) {
       // actionはServiceWorker内でのみサポート
