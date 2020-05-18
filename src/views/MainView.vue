@@ -10,7 +10,12 @@
         width=24
         :color="color"
       )
-        .title {{ elapsedTime }}
+        v-row.justify-center
+          v-col(cols=12)
+            .display-1 {{ elapsedTime }}
+          v-col(cols=12).pa-0
+            .title {{ minites }}
+            .caption mins
       v-row.mt-6.justify-center.align-center
         v-col(cols=3).pa-0
           v-text-field(v-model.number="minites", type="number", label="Set minutes", min=1, :disabled="disabled")
