@@ -1,9 +1,11 @@
-<template lang="pug">
-  v-app
-    v-content
-      .title.py-4 Pomodoro Timer
-      v-divider
-      router-view
+<template>
+  <v-app>
+    <v-content>
+      <div class="title py-4">Pomodoro Timer</div>
+      <v-divider></v-divider>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">
