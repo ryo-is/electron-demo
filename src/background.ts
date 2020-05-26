@@ -39,7 +39,6 @@ function createWindow() {
         | undefined,
     },
     show: false,
-    closable: false,
     minimizable: false,
     maximizable: false,
     center: true,

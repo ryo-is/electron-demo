@@ -1,33 +1,47 @@
-<template lang="pug">
-  .home
-    //- v-btn(to="/users") users
-    //- v-btn(@click="onNotification") notification
-    .timer-area.mt-8
-      v-progress-circular(
-        rotate=270
-        size=240
+<template>
+  <div class="home">
+    <div class="timer-area mt-8">
+      <v-progress-circular
+        :rotate="270"
+        :size="240"
         :value="value"
-        width=24
+        :width="24"
         :color="color"
-      )
-        v-row.justify-center
-          v-col(cols=12)
-            .display-1 {{ elapsedTime }}
-          v-col(cols=12).pa-0
-            .title {{ minites }}
-            .caption mins
-      v-row.mt-6.justify-center.align-center
-        v-col(cols=3).pa-0
-          v-text-field(v-model.number="minites", type="number", label="Set minutes", min=1, :disabled="disabled")
-        v-col(cols=1).pa-0 mins
-        v-col(cols=12).pa-0
-          v-row(justify="center")
-            v-col(cols=3).pa-0
-              v-btn(color="primary", @click="timerStart") Start
-            //- v-col(cols=3).pa-0
-            //-   v-btn(color="warning", @click="timerStop") Stop
-            v-col(cols=3).pa-0
-              v-btn(color="error", @click="timerReset") Reset
+      >
+        <v-row class="justify-center">
+          <v-col :cols="12">
+            <div class="dispaly-1">{{ elapsedTime }}</div>
+          </v-col>
+          <v-col :cols="12">
+            <div class="title">{{ minites }}</div>
+            <div class="caption">mins</div>
+          </v-col>
+        </v-row>
+      </v-progress-circular>
+      <v-row class="mt-6 justify-center align-center">
+        <v-col :cols="3" class="pa-0">
+          <v-text-field
+            v-model.number="minites"
+            type="number"
+            label="Set minites"
+            :min="1"
+            :disabled="disabled"
+          ></v-text-field>
+        </v-col>
+        <v-col :cols="1" class="pa-0">mins</v-col>
+        <v-col :cols="12" class="pa-0">
+          <v-row class="justify-center">
+            <v-col :cols="3" class="pa-0">
+              <v-btn color="primary" @click="timerStart">Start</v-btn>
+            </v-col>
+            <v-col :cols="3" class="pa-0">
+              <v-btn color="error" @click="timerReset">Reset</v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
