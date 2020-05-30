@@ -76,7 +76,7 @@ export default Vue.extend({
     }
   },
   watch: {
-    color(newColor: string) {
+    color(newColor: string): void {
       switch (newColor) {
         case Color.WARNING:
           this.onNotification('75% digested')
@@ -90,7 +90,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    timerStart() {
+    timerStart(): void {
       this.disabled = true
       this.setSeconds = this.minites * 60
       this.intervalEvent = setInterval(() => {
@@ -115,18 +115,18 @@ export default Vue.extend({
         }
       }, 1000)
     },
-    timerStop() {
+    timerStop(): void {
       // TimerのStopは一旦後回し
       console.log('stop')
     },
-    timerReset() {
+    timerReset(): void {
       if (this.intervalEvent !== null) clearInterval(this.intervalEvent)
       this.value = 0
       this.elapsedTime = 0
       this.color = Color.PRIMARY
       this.disabled = false
     },
-    onNotification(bodyText: string) {
+    onNotification(bodyText: string): void {
       // actionはServiceWorker内でのみサポート
       new Notification('Timer notification', {
         body: bodyText,
